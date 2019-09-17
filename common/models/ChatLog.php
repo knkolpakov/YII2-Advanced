@@ -58,4 +58,19 @@ class ChatLog extends \yii\db\ActiveRecord
         }
 
     }
+
+    public static function sendChat(string $msg)
+    {
+        try {
+            
+            $model = new self();
+            $model->username = Yii::$app->user->identity->username;
+            $model->message = $msg;
+            $model->created_at = time();
+            $model->save();
+        } catch (\Throwable $exception) {
+            Yii::error($exception->getMessage());
+        }
+
+    }
 }

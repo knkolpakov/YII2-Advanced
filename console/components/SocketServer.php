@@ -35,6 +35,7 @@ class SocketServer implements MessageComponentInterface
     private function showHistory($conn){
         $chatLogs = ChatLog::find()->all();
         foreach ($chatLogs as $log) {
+            $msg['date']=\Yii::$app->formatter->asDatetime();
             $msg = json_encode($log->attributes);
             $conn->send($msg);
         }

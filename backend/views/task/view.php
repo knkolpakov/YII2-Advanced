@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Task */
+/* @var $model common\models\Task */
 
-$this->title = $model->id;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,20 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'tracker',
-            'status_id',
-            'topic',
-            'id_project',
+            'name',
+            'description',
             'author_id',
-            'performer_id',
+            'status_id',
+            'priority_id',
+            'project_id',
             'created_at',
             'updated_at',
-            'category_id',
-            'priority_id',
-            'description:ntext',
-            'readiness',
-            'resolution_id',
-            'version',
         ],
     ]) ?>
 
