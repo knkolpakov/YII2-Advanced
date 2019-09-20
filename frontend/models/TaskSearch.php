@@ -4,10 +4,10 @@ namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Task;
+use common\models\Task;
 
 /**
- * TaskSearch represents the model behind the search form of `frontend\models\Task`.
+ * TaskSearch represents the model behind the search form of `common\models\Task`.
  */
 class TaskSearch extends Task
 {
@@ -17,8 +17,8 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'author_id', 'performer_id', 'created_at', 'updated_at', 'readiness'], 'integer'],
-            [['tracker', 'status', 'topic', 'category', 'priority', 'description', 'resolution'], 'safe'],
+            [['id', 'author_id', 'status_id', 'priority_id', 'project_id', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -60,19 +60,15 @@ class TaskSearch extends Task
         $query->andFilterWhere([
             'id' => $this->id,
             'author_id' => $this->author_id,
-            'performer_id' => $this->performer_id,
+            'status_id' => $this->status_id,
+            'priority_id' => $this->priority_id,
+            'project_id' => $this->project_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'readiness' => $this->readiness,
         ]);
 
-        $query->andFilterWhere(['like', 'tracker', $this->tracker])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'topic', $this->topic])
-            ->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'priority', $this->priority])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'resolution', $this->resolution]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

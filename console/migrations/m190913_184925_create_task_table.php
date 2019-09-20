@@ -14,36 +14,39 @@ class m190913_184925_create_task_table extends Migration
     {
         $this->createTable('{{%task}}', [
             'id' => $this->primaryKey(),
-            'tracker' => $this->string(20)->notNull(),
-            'status_id' => $this->integer()->notNull(),
-            'topic' => $this->string()->notNull(),
-            'id_project' => $this->integer()->notNull(),
+            'name' => $this->string(20)->notNull(),
+            'description' => $this->string(20)->notNull(),
             'author_id' => $this->integer()->notNull(),
-            'performer_id' => $this->integer()->notNull(),
+            'status_id' => $this->integer()->notNull(),
+            'priority_id' => $this->integer()->notNull(),
+            'project_id' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'category_id' => $this->integer()->notNull(),
-            'priority_id' => $this->integer()->notNull(),
-            'description' => $this->text()->notNull(),
-            'readiness' => $this->integer()->notNull(),
-            'resolution_id' => $this->integer(),
-            'version' => $this->integer()->notNull(),
         ]);
 
         $this->addForeignKey(
             'FK_project_project_id',
             'task',
-            'id_project',
+            'priority_id',
             'project',
             'id',
             'RESTRICT',
             'CASCADE');
 
         $this->addForeignKey(
-            'FK_usertask_performer_id',
+            'FK_priority_priority_id',
             'task',
-            'performer_id',
-            'user',
+            'priority_id',
+            'priority',
+            'id',
+            'RESTRICT',
+            'CASCADE');
+
+        $this->addForeignKey(
+            'FK_status_status_id',
+            'task',
+            'status_id',
+            'status',
             'id',
             'RESTRICT',
             'CASCADE');

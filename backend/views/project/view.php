@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Project */
@@ -33,8 +34,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'project_name',
-            'id_user',
-            'id_project_status',
+            [
+                'label'=>'Автор',
+                'value'=> function (Project $model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'label'=>'Статус',
+                'value'=> function (Project $model) {
+                    return $model->projectStatus->project_status_name;
+                }
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
@@ -45,20 +58,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'tracker',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::a($model->name, ['task/view', 'id'=>$model->id]);
+                }
+            ],
+            'description',
+            'author_id',
             'status_id',
-            'topic',
-            'id_project',
-            //'author_id',
-            //'performer_id',
+            //'priority_id',
+            //'project_id',
             //'created_at',
             //'updated_at',
-            //'category_id',
-            //'priority_id',
-            //'description:ntext',
-            //'readiness',
-            //'resolution_id',
-            //'version',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

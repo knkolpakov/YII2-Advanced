@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProjectSearch */
@@ -34,7 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a($model->project_name, ['project/view', 'id'=>$model->id]);
                 }
             ],
-            'id_user',
+            [
+                'label'=>'Автор',
+                'value'=> function (Project $model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'label'=>'Статус',
+                'value'=> function (Project $model) {
+                    return $model->projectStatus->project_status_name;
+                }
+            ],
             'id_project_status',
 
             ['class' => 'yii\grid\ActionColumn'],

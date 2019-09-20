@@ -17,33 +17,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'tracker') ?>
+    <?= $form->field($model, 'name') ?>
+
+    <?= $form->field($model, 'description') ?>
+
+    <?= $form->field($model, 'author_id') ?>
 
     <?= $form->field($model, 'status_id') ?>
 
-    <?= $form->field($model, 'topic') ?>
+    <?php // echo $form->field($model, 'priority_id') ?>
 
-    <?= $form->field($model, 'id_project') ?>
-
-    <?php // echo $form->field($model, 'author_id') ?>
-
-    <?php // echo $form->field($model, 'performer_id') ?>
+    <?php // echo $form->field($model, 'project_id') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'category_id') ?>
-
-    <?php // echo $form->field($model, 'priority_id') ?>
-
-    <?php // echo $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'readiness') ?>
-
-    <?php // echo $form->field($model, 'resolution_id') ?>
-
-    <?php // echo $form->field($model, 'version') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

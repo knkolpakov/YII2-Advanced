@@ -3,12 +3,12 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Project;
+use common\models\Project;
 use backend\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\Task;
+use common\models\Task;
 use backend\models\TaskSearch;
 
 /**

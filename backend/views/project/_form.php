@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_user')->textInput() ?>
 
-    <?= $form->field($model, 'id_project_status')->textInput() ?>
+    <?= $form->field($model, 'id_project_status')->dropDownList(\common\models\ProjectStatus::getProjectStatusName()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
