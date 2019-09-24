@@ -12,11 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'project_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'project_name')->textInput(['maxlength' => true])->label('Название проекта') ?>
 
-    <?= $form->field($model, 'id_user')->textInput() ?>
-
-    <?= $form->field($model, 'id_project_status')->dropDownList(\common\models\ProjectStatus::getProjectStatusName()) ?>
+    <?= $form->field($model, 'id_project_status')->dropDownList(\common\models\ProjectStatus::getProjectStatusName())->label('Статус проекта') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

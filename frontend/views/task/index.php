@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Task;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\TaskSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tasks';
+$this->title = 'Задачи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="task-index">
@@ -24,19 +25,50 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'label'=>'Задача к проекту',
+                'value'=> function (Task $model) {
+                    return $model->project->project_name;
+                }
+            ],
+            [
+                'attribute' => 'name',
+                'label'=>'Название',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::a($model->name, ['task/view', 'id'=>$model->id]);
+                }
+            ],
+            [
+                'attribute' => 'description',
+                'label'=>'Описание',
+            ],
+            [
+                'label'=>'Автор',
+                'value'=> function (Task $model) {
+                    return $model->author->username;
+                }
+            ],
+            [
+                'label'=>'Статус',
+                'value'=> function (Task $model) {
+                    return $model->status->name;
+                }
+            ],
+            [
+                'label'=>'Приоритет',
+                'value'=> function (Task $model) {
+                    return $model->priority->name;
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+                'label'=>'Дата создания',
+            ],
 
-            'id',
-            'name',
-            'description',
-            'author_id',
-            'status_id',
-            //'priority_id',
-            //'project_id',
-            //'created_at',
-            //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+        
         ],
     ]); ?>
 

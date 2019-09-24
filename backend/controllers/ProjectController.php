@@ -54,11 +54,12 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         $taskSearchModel = new TaskSearch();
-        $taskDataProvider = $taskSearchModel->search(Yii::$app->request->queryParams);
+        $taskDataProvider = $taskSearchModel->search(Yii::$app->request->queryParams, $model->id);
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'taskSearchModel'=>$taskSearchModel,
             'taskDataProvider'=>$taskDataProvider
         ]);
