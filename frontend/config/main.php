@@ -5,15 +5,23 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
-
-return [
+$config =  [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+    'api' => [
+        'class' => 'frontend\modules\api\Module',
+    ],
+],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => \yii\web\JsonParser::class,
+                'charset' => 'UTF-8'
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -36,16 +44,52 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        
         'urlManager' => [
             'enablePrettyUrl' => true,
+            //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => 'api/task',
+                    //отключим трансформацию task в tasks
+                    //'pluralize' => false,
+                    'extraPatterns' => [
+                        
+                    ],
+                ],
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => 'api/user',
+                    //'pluralize' => false,
+                    'extraPatterns' => [
+                        
+                    ],
+                ],
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => 'api/project',
+                    //'pluralize' => false,
+                    'extraPatterns' => [
+                        
+                    ],
+                ]
             ],
         ],
-        
     ],
     'params' => $params,
 ];
+if (YII_ENV_DEV) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*']
+    ];
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        'allowedIPs' => ['*']
+    ];
+}
+return $config;
