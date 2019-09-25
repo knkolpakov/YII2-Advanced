@@ -72,6 +72,10 @@ class TaskController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'author' => \yii\helpers\ArrayHelper::map
+            (\common\models\User::getAktiveUsers(), 'id', 'username'),
+            'project' => \yii\helpers\ArrayHelper::map
+            (\common\models\Project::getAktiveProjects(), 'id', 'project_name'),
         ]);
     }
 
@@ -92,21 +96,11 @@ class TaskController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'author' => \yii\helpers\ArrayHelper::map
+            (\common\models\User::getAktiveUsers(), 'id', 'username'),
+            'project' => \yii\helpers\ArrayHelper::map
+            (\common\models\Project::getAktiveProjects(), 'id', 'project_name'),
         ]);
-    }
-
-    /**
-     * Deletes an existing Task model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**

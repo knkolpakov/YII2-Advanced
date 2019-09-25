@@ -2,21 +2,18 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Projects';
+$this->title = 'Проекты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -24,14 +21,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'project_name',
-            'id_user',
-            'id_project_status',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'project_name',
+                'label'=>'Название',
+                'format' => 'raw',
+                'value' => function($model){
+                    return Html::a($model->project_name, ['project/view', 'id'=>$model->id]);
+                }
+            ],
+            [
+                'label'=>'Автор',
+                'value'=> function (Project $model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'label'=>'Статус',
+                'value'=> function (Project $model) {
+                    return $model->projectStatus->project_status_name;
+                }
+            ],
         ],
     ]); ?>
 
