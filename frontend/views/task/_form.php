@@ -14,9 +14,9 @@ use \yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Название задачи') ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'description')->textArea(['maxlength' => true])->label('Описание задачи') ?>
 
     <?= $form->field($model, 'author_id')->dropDownList($author)->label('Задача для пользователя') ?>
 

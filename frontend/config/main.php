@@ -9,6 +9,7 @@ $config =  [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'project/index',
     'modules' => [
     'api' => [
         'class' => 'frontend\modules\api\Module',

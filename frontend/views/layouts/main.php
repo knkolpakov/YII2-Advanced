@@ -36,6 +36,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Чат', 'url' => ['/chat/index']],
         ['label' => 'Проекты', 'url' => ['/project/index']],
         ['label' => 'Задачи', 'url' => ['/task/index']],
     ];

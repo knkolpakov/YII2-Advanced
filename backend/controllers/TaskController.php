@@ -72,6 +72,10 @@ class TaskController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'author' => \yii\helpers\ArrayHelper::map
+            (\common\models\User::getAktiveUsers(), 'id', 'username'),
+            'project' => \yii\helpers\ArrayHelper::map
+            (\common\models\Project::getAktiveProjects(), 'id', 'project_name'),
         ]);
     }
 
@@ -92,6 +96,10 @@ class TaskController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'author' => \yii\helpers\ArrayHelper::map
+            (\common\models\User::getAktiveUsers(), 'id', 'username'),
+            'project' => \yii\helpers\ArrayHelper::map
+            (\common\models\Project::getAktiveProjects(), 'id', 'project_name'),
         ]);
     }
 
