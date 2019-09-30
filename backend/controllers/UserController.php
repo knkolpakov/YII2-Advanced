@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
+use backend\models\User;
 use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -62,18 +62,6 @@ class UserController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Updates an existing User model.

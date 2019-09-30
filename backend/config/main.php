@@ -10,6 +10,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'defaultRoute' => 'project/index',
     'modules' => [],
     'components' => [
         'request' => [

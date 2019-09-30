@@ -8,7 +8,7 @@ use common\models\Project;
 /* @var $searchModel backend\models\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Projects';
+$this->title = 'Проекты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать проект', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'attribute' => 'project_name',
+                'label'=>'Название',
                 'format' => 'raw',
                 'value' => function($model){
                     return Html::a($model->project_name, ['project/view', 'id'=>$model->id]);
@@ -47,7 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->projectStatus->project_status_name;
                 }
             ],
-            'id_project_status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
